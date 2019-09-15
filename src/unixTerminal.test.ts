@@ -128,7 +128,7 @@ if (process.platform !== 'win32') {
         const cp = require('child_process');
         const p = cp.spawn('node', ['-e', data]);
         let sub = '';
-        p.stdout.on('data', (data) => {
+        p.stdout.on('data', (data:any) => {
           if (!data.toString().indexOf('ready')) {
             sub = data.toString().split(' ')[1].slice(0, -1);
             setTimeout(() => {
@@ -170,7 +170,7 @@ if (process.platform !== 'win32') {
         const cp = require('child_process');
         const p = cp.spawn('node', ['-e', data]);
         let sub = '';
-        p.stdout.on('data', (data) => {
+        p.stdout.on('data', (data:any) => {
           if (!data.toString().indexOf('ready')) {
             sub = data.toString().split(' ')[1].slice(0, -1);
             setTimeout(() => {
