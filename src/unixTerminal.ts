@@ -68,6 +68,7 @@ export class UnixTerminal extends Terminal {
     }
 
     const cwd = opt.cwd || process.cwd();
+    env.PWD = cwd;
     const name = opt.name || env.TERM || DEFAULT_NAME;
     env.TERM = name;
     const parsedEnv = this._parseEnv(env);
@@ -257,6 +258,9 @@ export class UnixTerminal extends Terminal {
    */
 
   public resize(cols: number, rows: number): void {
+    if (cols <= 0 || rows <= 0 || isNaN(cols) || isNaN(rows) || cols === Infinity || rows === Infinity) {
+      throw new Error('resizing must be done using positive cols and rows');
+    }
     pty.resize(this._fd, cols, rows);
     this._cols = cols;
     this._rows = rows;
